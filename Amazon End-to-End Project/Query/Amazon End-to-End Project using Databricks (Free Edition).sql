@@ -213,3 +213,13 @@ DROP TABLE order_items
 SELECT *
 FROM amazon_raw
 LIMIT 10;
+
+--Which customers generated the highest total revenue, and how much did each spend?
+SELECT c.customer_name, SUM(i.total_amount)
+FROM customer c
+JOIN order o
+  ON c.customer_id = o.customer_id
+JOIN order_items i
+  ON i.order_id = o.order_id
+GROUP BY c.customer_name
+ORDER BY SUM(i.total_amount) DESC

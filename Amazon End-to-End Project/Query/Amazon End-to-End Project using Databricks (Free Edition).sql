@@ -223,3 +223,65 @@ JOIN order_items i
   ON i.order_id = o.order_id
 GROUP BY c.customer_name
 ORDER BY SUM(i.total_amount) DESC
+
+--Which Orders and products and dates that are cancelled (Order Status Cancelled  = 5)
+WITH cancelled_orders AS (SELECT
+  o.order_id, 
+  ot.product_id, 
+  o.order_date,
+  o.order_status_id AS Status
+FROM order o
+INNER JOIN order_items ot
+ON o.order_id = ot.order_id
+WHERE order_status_id = 5
+ORDER BY order_date DESC
+LIMIT 100)
+
+SELECT DISTINCT * FROM cancelled_orders;
+
+
+
+--Count the number of orders for each customer and which product
+SELECT c.customer_name, p.product_name, COUNT(o.order_id) AS No_Of_Orders
+FROM order o
+JOIN customer c
+ON o.customer_id = c.customer_id
+JOIN order_items ot
+ON o.order_id = ot.order_id
+JOIN product p
+ON ot.product_id = p.product_id
+GROUP BY c.customer_name, p.product_name
+ORDER BY COUNT(o.order_id) DESC
+
+--Best Selling Product (Top 10)
+SELECT 
+  p.product_name, 
+  SUM(ot.total_amount) AS Total_Sales
+FROM order_items ot
+JOIN product p
+ON ot.product_id = p.product_id
+GROUP BY p.product_name
+ORDER BY Total_Sales DESC
+LIMIT 10;
+
+--Which country generated the most sales
+SELECT 
+  l.country,
+  SUM(ot.total_amount) AS Total_Sales
+FROM order o
+JOIN order_items ot
+ON o.order_id = ot.order_id
+JOIN location l
+ON o.location_id = l.location_id
+GROUP BY l.country
+ORDER BY Total_Sales DESC
+
+--Frequently Used Payment Method
+SELECT 
+  pm.payment_method_name,
+  COUNT(o.order_id)
+FROM order o
+JOIN payment_method pm
+ON o.payment_method_id = pm.payment_method_id
+GROUP BY pm.payment_method_name
+ORDER BY COUNT(o.order_id) DESC

@@ -36,13 +36,13 @@ This repository showcases an **end-to-end data analytics and engineering workflo
 
 ### 5. Dashboard Creation & Visualization
 - Build interactive dashboards in Databricks.  
-- Visualize data using bar charts, line charts, heatmaps, and other charts.  
+- Visualize data using bar charts, line charts, and other charts.  
 - Summarize key metrics for easy reporting and decision-making.  
 
 ---
 
 ## Key Learning Outcomes
-- Hands-on experience with **Databricks database creation and management**.  
+- Hands-on experience with **Databricks database and Big Query creation and management**.  
 - Understanding of **data normalization and relational modeling**.  
 - Performing **data analysis using SQL and PySpark**.  
 - Creating **dashboards for actionable insights**.  

@@ -1,0 +1,6 @@
+﻿orderstatus_id,order_status
+1,Delivered
+2,Cancelled
+3,Pending
+4,Shipped
+5,Returned

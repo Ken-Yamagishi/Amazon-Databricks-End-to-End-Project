@@ -1,0 +1,7 @@
+﻿paymentmethod_id,payment_method
+1,Debit Card
+2,Amazon Pay
+3,Cash on Delivery
+4,Credit Card
+5,UPI
+6,Net Banking
